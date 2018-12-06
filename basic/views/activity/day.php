@@ -1,0 +1,16 @@
+<?php
+
+/* @var $this yii\web\View */
+/* @var $form yii\bootstrap\ActiveForm */
+/* @var $model app\models\ContactForm */
+
+use yii\helpers\Html;
+use yii\bootstrap\ActiveForm;
+use yii\captcha\Captcha;
+
+$this->title = 'Activity';
+$this->params['breadcrumbs'][] = $this->title;
+?>
+
+<h1>День недели: <?=$model->weekday; ?></h1>
+<h1>Часы: <?=$model->hours;?>:<?=$model->seconds; ?></h1>
