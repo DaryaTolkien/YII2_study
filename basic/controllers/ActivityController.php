@@ -19,7 +19,7 @@ class ActivityController extends Controller{
 	
 	public function actionCreate(){
 		$model = new Activity();
-	    return $this->render('view', ['model' => $model]);
+	    return $this->render('index', ['model' => $model]);
 	}
 	
 }

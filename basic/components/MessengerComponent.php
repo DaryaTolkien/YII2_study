@@ -1,5 +1,5 @@
 <?php
-namespace app\components
+namespace app\components;
 	
 class MessengerComponent extends Component{
 	public $message;

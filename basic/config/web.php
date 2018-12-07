@@ -51,16 +51,16 @@ $config = [
             ],
         ],
         */
-	'messenger' => [
-    'class' => 'app\components\MessengerComponent'
-]
+	    'messenger' => [
+        'class' => 'app\components\MessengerComponent'
+        ],
     ],
     'params' => $params,
 	'modules' => [
         'statistic' => [
             'class' => 'app\modules\statistic\Module',
         ],
-    ]
+    ],
 ];
 
 if (YII_ENV_DEV) {

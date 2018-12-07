@@ -7,7 +7,7 @@ use yii\base\Model;
 class Activity extends Model{ //Отражает сущность хранимого в календаре события
 	
 	public $title; //название события
-	public $starDay; //начало события
+	public $startDay; //начало события
 	public $endDay; //конец события
 	public $idAuhtor; //id автора события
 	public $body; //описание события

@@ -9,7 +9,7 @@ class Day extends Model{
 	public $hours; //часы день/ночь
 	public $seconds;
 	
-	public static function getData($value){
+	private static function getData($value){
 		$lol = getdate( time() );
 		return $lol["$value"];
 	}

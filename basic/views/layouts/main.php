@@ -11,6 +11,13 @@ use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
 AppAsset::register($this);
+
+$session = Yii::$app->session;
+if($session->isActive){
+	$session['last_url'] = $_SERVER['HTTP_REFERER'];
+} else {
+	$session->open();
+}
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -58,8 +65,10 @@ AppAsset::register($this);
     ]);
     NavBar::end();
     ?>
-
     <div class="container">
+		 <div>
+			 <span>Последняя посещённая странца: <a href="<?= $session['last_url']; ?>"><?= $session['last_url']; ?></a></span>
+	</div>
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
