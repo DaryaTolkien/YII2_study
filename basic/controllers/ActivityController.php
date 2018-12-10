@@ -22,4 +22,23 @@ class ActivityController extends Controller{
 	    return $this->render('index', ['model' => $model]);
 	}
 	
+	public function actionForm(){
+    $model = new \app\models\ActivityForm();
+
+    if ($model->load(Yii::$app->request->post())) {
+        if ($model->validate()) {
+            // form inputs are valid, do something here
+            return $this->redirect(['success']);
+        }
+    }
+    return $this->render('form', [
+        'model' => $model,
+    ]);
+    }
+	
+	public function actionSuccess(){
+		echo "All good! Successs!";
+		exit();
+	}
+	
 }

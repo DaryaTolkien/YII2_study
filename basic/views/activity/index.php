@@ -10,7 +10,7 @@
 <h3><?=$model->getAttributeLabel('body') ?></h3>
 <div><?=$model->body ?></div>
 
-<?php echo \Yii::$app->messenger->display('Сообщение'); ?>
+
 
 
      
