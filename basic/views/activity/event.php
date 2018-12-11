@@ -1,5 +1,10 @@
+<?php 
 
-<h1>Активность:<?=$model->title; ?></h1>
+$this->title = 'Event';
+$this->params['breadcrumbs'][] = $this->title;
+?>
+
+<h1>Событие:<?=$model->title; ?></h1>
 
 <?php if($model->startDay == $model->endDay) : ?>
      <p>Событие на <?=date("d.m.Y", $model->startDay)?></p>

@@ -6,10 +6,6 @@ $this->title = 'My Yii Application';
 ?>
 <div class="site-index">
 
-    <div class="jumbotron">
-        <p class="lead">Главная</p>
-    </div>
-
     <div class="body-content">
 
         <div class="row">

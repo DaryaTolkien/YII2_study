@@ -4,7 +4,7 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 
-class Activity extends Model{ //Отражает сущность хранимого в календаре события
+class ActivityEvent extends Model{ //Отражает сущность хранимого в календаре события
 	
 	public $title; //название события
 	public $startDay; //начало события

@@ -14,7 +14,6 @@ class ActivityForm extends Model{
 	public function rules(){
 		return [
 			[['name', 'description'], 'required'],
-			[['dateTimeStart', 'dateTimeAnd'], 'date'],
 			['isBlock', 'boolean']
 		];
 	}
