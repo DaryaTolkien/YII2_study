@@ -64,7 +64,7 @@ if($session->isActive){
             )
         ],
     ]);
-    NavBar::end();
+    NavBar::end();	
     ?>
     <div class="container">
 		 <div>

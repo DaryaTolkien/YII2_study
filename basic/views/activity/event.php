@@ -1,6 +1,6 @@
 <?php 
 
-$this->title = 'Event';
+$this->title = 'Событие';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <h3><?=$model->getAttributeLabel('body') ?></h3>
 <div><?=$model->body ?></div>
-
+ 
 
 
 

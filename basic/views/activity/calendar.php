@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 
-$this->title = 'Calendar';
+$this->title = 'Календарь';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h2 style="margin-top:20px;">Календарь событий</h2>

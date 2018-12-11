@@ -4,8 +4,7 @@ namespace app\controllers;
 use Yii;
 use yii\web\controller;
 use app\models\ActivityEvent;
-use app\models\Day;
-use yii\web\Response;
+use yii\web\UploadedFile;
 
 class ActivityController extends Controller{
 	
@@ -19,9 +18,11 @@ class ActivityController extends Controller{
     $model = new \app\models\ActivityForm();
 
     if ($model->load(Yii::$app->request->post())) {
+		    $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
         if ($model->validate()) {  //Если все верно и валидно, то принимаем и обрабатываем данные
-			
-			return $this->render('form-success', ['model' => $model]);
+			    $path = Yii::$app->params['pathUploads'];
+                $model->imageFile->saveAs($path . $model->imageFile->baseName . '.' . $model->imageFile->extension);
+		        return $this->render('form-success', ['model' => $model]);
         }
     }
     return $this->render('form', [
