@@ -45,8 +45,9 @@ if($session->isActive){
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-			['label' => 'Activity', 'url' => ['/activity/index']],
+            ['label' => 'Главная', 'url' => ['/site/index']],
+			['label' => 'Создать', 'url' => ['/activity/form']],
+			['label' => 'Календарь', 'url' => ['/activity/calendar']],
            // ['label' => 'About', 'url' => ['/site/about']],
            // ['label' => 'Contact', 'url' => ['/site/contact']],
             Yii::$app->user->isGuest ? (
@@ -67,7 +68,7 @@ if($session->isActive){
     ?>
     <div class="container">
 		 <div>
-			 <span>Последняя посещённая странца: <a href="<?= $session['last_url']; ?>"><?= $session['last_url']; ?></a></span>
+			 <span class="last_url">Последняя посещённая странца: <a href="<?= $session['last_url']; ?>"><?= $session['last_url']; ?></a></span>
 	</div>
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],

@@ -114,6 +114,60 @@ a.desc:after {
     outline: none;
 }
 
+/* Лайаут мои стили */
+
+/* Создание события */
+
+
+.agreement{
+	display: block;
+	color: aqua;
+}
+
+.field-activityform-name, .field-activityform-description{
+	width: 300px;
+}
+
+.field-activityform-datetimestart, .field-activityform-datetimeand{
+	display: inline-block;
+	padding: 20px;
+	padding-left: 0px;
+	margin: auto;
+	text-align: center;
+}
+
+.form_activity_date{
+	padding: 5px;
+	border: 1px solid lightgray;
+}
+/* Календарь */
+
+
+.a_calendar_create{
+	display: inline-block;
+	padding: 15px;
+	border: 1px solid darkgray;
+	color: currentColor;
+	transition-duration: 0.3s;
+}
+
+.a_calendar_create:hover {
+	text-decoration: none;
+	background-color: #f5f5f5;
+	color: black;
+	border: 1px solid transparent;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -6,11 +6,10 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
-use yii\captcha\Captcha;
 
-$this->title = 'Activity';
+$this->title = 'Success';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<h1>День недели: <?=$model->weekday; ?></h1>
-<h1>Часы: <?=$model->hours;?>:<?=$model->seconds; ?></h1>
+<h1>Название события: <?= Html::encode($model->name)?> </h1>
+<h1>Описание события: <?= Html::encode($model->description)?> </h1>
