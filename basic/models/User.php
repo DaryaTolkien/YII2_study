@@ -2,8 +2,7 @@
 
 namespace app\models;
 
-class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
-{
+class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface{
     public $id;
     public $username;
     public $password;
@@ -26,19 +25,14 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
             'accessToken' => '101-token',
         ],
     ];
-
-
-    /**
-     * {@inheritdoc}
-     */
+	
     public static function findIdentity($id)
     {
         return isset(self::$users[$id]) ? new static(self::$users[$id]) : null;
     }
 
-    /**
-     * {@inheritdoc}
-     */
+
+	
     public static function findIdentityByAccessToken($token, $type = null)
     {
         foreach (self::$users as $user) {
@@ -67,25 +61,21 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
         return null;
     }
 
-    /**
-     * {@inheritdoc}
-     */
+
+	
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * {@inheritdoc}
-     */
+ 
+	
     public function getAuthKey()
     {
         return $this->authKey;
     }
 
-    /**
-     * {@inheritdoc}
-     */
+	
     public function validateAuthKey($authKey)
     {
         return $this->authKey === $authKey;

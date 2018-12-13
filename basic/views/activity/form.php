@@ -13,10 +13,10 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="activity-form">
 
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
-      <?= $form->field($model, 'name')->label('Название события') ?>
-	  <?= $form->field($model, 'description')->textarea(['rows' => '2'])->label('Описание события') ?>
-	  <?= $form->field($model, 'dateTimeStart')->label('Дата старта')->input('date', ['class' => 'form_activity_date']) ?>
-	  <?= $form->field($model, 'dateTimeAnd')->label('Дата завершения')->input('date', ['class' => 'form_activity_date']) ?>
+      <?= $form->field($model, 'activity_name')->label('Название события') ?>
+	  <?= $form->field($model, 'body')->textarea(['rows' => '2'])->label('Описание события') ?>
+	  <?= $form->field($model, 'activity_start_timestamp')->label('Дата старта')->input('date', ['class' => 'form_activity_date']) ?>
+	  <?= $form->field($model, 'activity_end_timestamp')->label('Дата завершения')->input('date', ['class' => 'form_activity_date']) ?>
 	 <?= $form->field($model, 'imageFile')->fileInput()->label('Фото события') ?>
 	  <?//= Html::activeCheckbox($model, 'isBlock', ['class' => 'agreement']) ?>
     

@@ -4,17 +4,16 @@ $this->title = 'Событие';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<h1>Событие:<?=$model->title; ?></h1>
-
-<?php if($model->startDay == $model->endDay) : ?>
-     <p>Событие на <?=date("d.m.Y", $model->startDay)?></p>
-<?php else: ?>
-     <p>Событие c <?=date("d.m.Y", $model->startDay)?> по <?=date("d.m.Y", $model->endDay)?></p>
-<?php endif; ?>
-
-<h3><?=$model->getAttributeLabel('body') ?></h3>
-<div><?=$model->body ?></div>
+<div class="event_content">
+	
+   <h3>Название события: <span class="event_span"><?= $list->activity_name ?></span></h3>
+   <div class="event_div">Описание события: <span class="event_span"><?= $list->body ?></span></div>
+   <div class="event_div">Начало: <span class="event_span"><?= $list->activity_start_timestamp ?></span></div>
+   <div class="event_div">Конец: <span class="event_span"><?= $list->activity_end_timestamp ?></span></div>
  
+   <img src="/images/img_event/<?= $list->imageFile ?>" class="img_event">
+	
+</div>
 
 
 

@@ -3,15 +3,21 @@ namespace app\controllers;
 
 use Yii;
 use yii\web\controller;
-use app\models\ActivityEvent;
+use app\models\ActivityDAO;
+use app\models\Activity_bd;
 use yii\web\UploadedFile;
+
+
 
 class ActivityController extends Controller{
 	
 	
 	public function actionEvent(){
-		$model = new ActivityEvent();
-	    return $this->render('event', ['model' => $model]);
+		$id = $_GET['id'];
+		$list = Activity_bd::find()
+        ->where(['id_activity' => $id])
+        ->one();
+		return $this->render('event', ['list' => $list]);
 	}
 	
 	public function actionForm(){
@@ -20,9 +26,13 @@ class ActivityController extends Controller{
     if ($model->load(Yii::$app->request->post())) {
 		    $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
         if ($model->validate()) {  //Если все верно и валидно, то принимаем и обрабатываем данные
-			    $path = Yii::$app->params['pathUploads'];
-                $model->imageFile->saveAs($path . $model->imageFile->baseName . '.' . $model->imageFile->extension);
-		        return $this->render('form-success', ['model' => $model]);
+			        $path = Yii::$app->params['pathUploads'];
+                    $model->imageFile->saveAs($path . $model->imageFile->baseName . '.' . $model->imageFile->extension);
+			    $activityDAO = new ActivityDAO();
+			    $activityDAO->create($model);
+			
+		$list = Activity_bd::find()->orderBy('id_activity')->all();
+		return $this->render('calendar', ['list' => $list]);
         }
     }
     return $this->render('form', [
@@ -31,7 +41,8 @@ class ActivityController extends Controller{
     }
 	
 	public function actionCalendar(){
-		return $this->render('calendar', ['model' => $model]);
+		$list = Activity_bd::find()->orderBy('id_activity')->all();
+		return $this->render('calendar', ['list' => $list]);
 	}
 	
 }

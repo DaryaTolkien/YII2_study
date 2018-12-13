@@ -5,28 +5,21 @@ use Yii;
 use yii\base\Model;
 
 class ActivityForm extends Model{
-	public $name;
-	public $description;
-	public $dateTimeStart;
-	public $dateTimeAnd;
+	public $activity_name;
+	public $body;
+	public $activity_start_timestamp;
+	public $activity_end_timestamp;
 	public $imageFile;
+	public $id_user;
 	public $isBlock = false;
 	
 	public function rules(){
 		return [
-			[['name', 'description'], 'required'],
+			[['activity_name', 'body','activity_start_timestamp','activity_end_timestamp'], 'required'],
 			['isBlock', 'boolean'],
+			[['activity_start_timestamp', 'activity_end_timestamp'], 'date', 'format' => 'php:Y-m-d'],
 			[['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg']
 		];
 	}
-	/*
-	public function upload(){
-        if ($this->validate()) {
-			$path = Yii::$app->params['pathUploads'];
-            $this->imageFile->saveAs($path . $this->imageFile->baseName . '.' . $this->imageFile->extension);
-            return true;
-        } else {
-            return false;
-        }
-    }*/
+	
 }

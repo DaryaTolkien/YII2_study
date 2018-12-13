@@ -142,6 +142,20 @@ a.desc:after {
 }
 /* Календарь */
 
+.calendar_list{
+	padding: 20px;
+	margin: 20px;
+	border: 1px solid lightgray;
+	width: 60%;
+}
+
+.calendar_list a{
+    text-decoration: none;
+}
+
+.calendar_span{
+	padding: 7px;
+}
 
 .a_calendar_create{
 	display: inline-block;
@@ -157,6 +171,36 @@ a.desc:after {
 	color: black;
 	border: 1px solid transparent;
 }
+
+
+/*EVENT*/
+
+.event_content{
+	margin: 30px 0px;
+	padding: 20px 20px;
+	border: 1px solid lightgray;
+	width: 50%;
+}
+
+.event_div{
+	margin: 20px 0px;
+	font-size: 20px;
+}
+
+.event_span{
+	color:darkorange;
+}
+
+.img_event{
+	widows: 250px;
+	height: 250px;
+	margin: 30px 0px;
+}
+
+
+
+
+
 
 
 
