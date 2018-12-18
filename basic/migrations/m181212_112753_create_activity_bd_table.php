@@ -17,6 +17,7 @@ class m181212_112753_create_activity_bd_table extends Migration
         'activity_name' => $this->string(255)->notNull(),
         'activity_start_timestamp' => $this->timestamp()->defaultExpression("now()"),
         'activity_end_timestamp' => $this->timestamp()->defaultExpression("now()"),
+		'imageFile' => $this->string(30)->notNull(),
         'id_user' => $this->integer(),
         'body' => $this->text()
     ]);
@@ -28,6 +29,6 @@ class m181212_112753_create_activity_bd_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable('activity');
+        $this->dropTable('activity_bd');
     }
 }

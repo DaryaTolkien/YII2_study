@@ -17,6 +17,7 @@ class ActivityForm extends Model{
 		return [
 			[['activity_name', 'body','activity_start_timestamp','activity_end_timestamp'], 'required'],
 			['isBlock', 'boolean'],
+			[['id_user'], 'integer'],
 			[['activity_start_timestamp', 'activity_end_timestamp'], 'date', 'format' => 'php:Y-m-d'],
 			[['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg']
 		];

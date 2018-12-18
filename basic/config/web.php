@@ -54,6 +54,8 @@ $config = [
 	    'messenger' => [
         'class' => 'app\components\MessengerComponent'
         ],
+		'authManager' => [
+        'class' => 'yii\rbac\DbManager'],
     ],
     'params' => $params,
 	'modules' => [
