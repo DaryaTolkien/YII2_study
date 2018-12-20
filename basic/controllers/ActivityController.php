@@ -7,10 +7,11 @@ use yii\web\IdentityInterface;
 use yii\web\UploadedFile;
 
 use yii\filters\AccessControl;
+use yii\data\ActiveDataProvider;
 use app\models\ActivityDAO;
 use app\models\User;
 use app\models\Activity_bd;
-use app\models\signupForm;
+
 
 
 
@@ -26,38 +27,43 @@ class ActivityController extends Controller{
 					[
 						'actions' => ['form'],
 						'allow' => true,
-						'roles' => ['admin', 'simple'],
+						'roles' => ['@'],
+					],
+					[
+						'actions' => ['admin'],
+						'allow' => true,
+						'roles' => ['guest'],
 					],
 				],
 			],
 		];
 	}
 	
-	public function actionSignup(){
-		if(!Yii::$app->user->isGuest){
-			return $this->goHome(); 
-		}
-		$model = new signupForm();
-		if($model->load(Yii::$app->request->post()) && $model->validate()){
-			$user = new User();
-			$user->username = $model->username;
-			$user->password = Yii::$app->security->generatePasswordHash($model->password);//$user->setPassword($model->password);
-			if($user->save()){
-				return $this->goHome();
-			} else {
-				return $user->error;
-			}
-			
-		}
-		return $this->render('signup', ['model' => $model] );
+	public function actionAdmin(){
+		$query = Activity_bd::find();
+		$activitiesProvider = new ActiveDataProvider([
+          'query' => $query,
+          'pagination' => [
+                 'pageSize' => 5,
+           ],
+           'sort' => [
+                'defaultOrder' => [
+                'id_activity' => SORT_DESC,
+           ]
+          ],
+]);
+
+		return $this->render('admin', ['activitiesProvider' => $activitiesProvider]);
 	}
-	
 	
 	public function actionEvent(){
 		$id = $_GET['id'];
 		$list = Activity_bd::find()
         ->where(['id_activity' => $id])
         ->one();
+		if(is_null($list)){
+			throw new HttpException(404);
+		}
 		return $this->render('event', ['list' => $list]);
 	}
 	
@@ -87,5 +93,6 @@ class ActivityController extends Controller{
 		$list = Activity_bd::find()->orderBy('id_activity')->all();
 		return $this->render('calendar', ['list' => $list]);
 	}
+	
 	
 }

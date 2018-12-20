@@ -12,6 +12,7 @@ use yii\web\Response;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\User;
+use app\models\signupForm;
 
 class SiteController extends Controller
 {
@@ -74,6 +75,24 @@ class SiteController extends Controller
     }
 
 */
+	public function actionSignup(){
+		if(!Yii::$app->user->isGuest){
+			return $this->goHome(); 
+		}
+		$model = new signupForm();
+		if($model->load(Yii::$app->request->post()) && $model->validate()){
+			$user = new User();
+			$user->username = $model->username;
+			$user->password = $user->setPassword($model->password);//Yii::$app->security->generatePasswordHash($model->password);//
+			if($user->save()){
+				return $this->goHome();
+			} else {
+				return $user->error;
+			}
+			
+		}
+		return $this->render('signup', ['model' => $model] );
+	}
 
      public function actionLogin(){
        if (!Yii::$app->user->isGuest){
@@ -84,8 +103,6 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->login()){
 				return $this->goBack();
 			} 
-       
-		 
         $model->password = '';
         return $this->render('login', [
             'model' => $model,

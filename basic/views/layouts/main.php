@@ -48,8 +48,9 @@ if($session->isActive){
             ['label' => 'Главная', 'url' => ['/site/index']],
 			['label' => 'Создать', 'url' => ['/activity/form']],
 			['label' => 'Календарь', 'url' => ['/activity/calendar']],
+			['label' => 'Регистрация', 'url' => ['/site/signup']],
             Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
+                ['label' => 'Войти', 'url' => ['/site/login']]
             ) : (
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
