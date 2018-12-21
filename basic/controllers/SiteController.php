@@ -3,20 +3,23 @@
 namespace app\controllers;
 
 use Yii;
+
 use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\Response;
-use yii\filters\VerbFilter;
+
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\User;
+use app\models\signupForm;
 
 class SiteController extends Controller
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function behaviors()
-    {
+	
+	 public $rememberMe = true;
+    
+    public function behaviors(){
         return [
             'access' => [
                 'class' => AccessControl::className(),
@@ -38,11 +41,7 @@ class SiteController extends Controller
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function actions()
-    {
+    public function actions(){
         return [
             'error' => [
                 'class' => 'yii\web\ErrorAction',
@@ -54,21 +53,12 @@ class SiteController extends Controller
         ];
     }
 
-    /**
-     * Displays homepage.
-     *
-     * @return string
-     */
-    public function actionIndex()
-    {
+
+    public function actionIndex(){
         return $this->render('index');
     }
-
-    /**
-     * Login action.
-     *
-     * @return Response|string
-     */
+/*
+    
     public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {
@@ -86,25 +76,50 @@ class SiteController extends Controller
         ]);
     }
 
-    /**
-     * Logout action.
-     *
-     * @return Response
-     */
-    public function actionLogout()
-    {
+*/
+	public function actionSignup(){
+		if(!Yii::$app->user->isGuest){
+			return $this->goHome(); 
+		}
+		$model = new signupForm();
+		if($model->load(Yii::$app->request->post()) && $model->validate()){
+			$user = new User();
+			$user->username = $model->username;
+			$user->password = $user->setPassword($model->password);//Yii::$app->security->generatePasswordHash($model->password);//
+			if($user->save() && Yii::$app->user->login($user->findByUsername($user->username), $this->rememberMe ? 3600*24*30 : 0)){
+				return $this->goHome();
+			} else {
+				return $user->error;
+			}
+			
+		}
+		return $this->render('signup', ['model' => $model] );
+	}
+
+     public function actionLogin(){
+       if (!Yii::$app->user->isGuest){
+            return $this->goHome();
+        }
+		 
+        $model = new LoginForm();
+        if ($model->load(Yii::$app->request->post()) && $model->login()){
+				return $this->goBack();
+			} 
+        $model->password = '';
+        return $this->render('login', [
+            'model' => $model,
+        ]);	 
+    }
+	
+	
+    public function actionLogout(){
         Yii::$app->user->logout();
 
         return $this->goHome();
     }
 
-    /**
-     * Displays contact page.
-     *
-     * @return Response|string
-     */
-    public function actionContact()
-    {
+
+    public function actionContact(){
         $model = new ContactForm();
         if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
             Yii::$app->session->setFlash('contactFormSubmitted'); 

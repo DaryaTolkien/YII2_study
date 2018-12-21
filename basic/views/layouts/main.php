@@ -45,12 +45,12 @@ if($session->isActive){
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-			['label' => 'Activity', 'url' => ['/activity/index']],
-           // ['label' => 'About', 'url' => ['/site/about']],
-           // ['label' => 'Contact', 'url' => ['/site/contact']],
+            ['label' => 'Главная', 'url' => ['/site/index']],
+			['label' => 'Создать', 'url' => ['/activity/form']],
+			['label' => 'Календарь', 'url' => ['/activity/calendar']],
+			['label' => 'Регистрация', 'url' => ['/site/signup']],
             Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
+                ['label' => 'Войти', 'url' => ['/site/login']]
             ) : (
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
@@ -63,11 +63,11 @@ if($session->isActive){
             )
         ],
     ]);
-    NavBar::end();
+    NavBar::end();	
     ?>
     <div class="container">
 		 <div>
-			 <span>Последняя посещённая странца: <a href="<?= $session['last_url']; ?>"><?= $session['last_url']; ?></a></span>
+			<!-- <span class="last_url">Последняя посещённая странца: <a href="<?//= $session['last_url']; ?>"><?//= $session['last_url']; ?></a></span> -->
 	</div>
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],

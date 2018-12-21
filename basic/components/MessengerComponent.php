@@ -1,7 +1,7 @@
 <?php
 namespace app\components;
 	
-class MessengerComponent extends Component{
+class MessengerComponent{
 	public $message;
 	
 	public function init(){
