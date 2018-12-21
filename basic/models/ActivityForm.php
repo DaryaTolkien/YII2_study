@@ -1,10 +1,10 @@
 <?php
 namespace app\models;
-
+use yii\db\ActiveRecord;
 use Yii;
 use yii\base\Model;
 
-class ActivityForm extends Model{
+class ActivityForm extends ActiveRecord{
 	public $activity_name;
 	public $body;
 	public $activity_start_timestamp;

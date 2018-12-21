@@ -22,10 +22,10 @@ class ActivityController extends Controller{
 		return[
 			'access' => [
 				'class' => AccessControl::className(),
-				'only' => ['form'],
+				'only' => ['form', 'calendar'],
 				'rules' => [
 					[
-						'actions' => ['form'],
+						'actions' => ['form', 'calendar'],
 						'allow' => true,
 						'roles' => ['@'],
 					],
@@ -56,15 +56,25 @@ class ActivityController extends Controller{
 		return $this->render('admin', ['activitiesProvider' => $activitiesProvider]);
 	}
 	
-	public function actionEvent(){
-		$id = $_GET['id'];
-		$list = Activity_bd::find()
-        ->where(['id_activity' => $id])
-        ->one();
-		if(is_null($list)){
-			throw new HttpException(404);
+	public function actionView($id){
+		return $this->render('view', ['model' => $this->getAutoLoad($id)]);
+	}
+	
+	public function actionDelete($id){
+		$model = $this->getAutoLoad($id);
+		$model->delete();
+		return $this->redirect(['activity/admin/']);
+	}
+	
+	public function actionUpdate($id){
+		$model = $this->getAutoLoad($id);
+		if($model->load(Yii::$app->request->post())){
+			if($model->validate()){
+				$model->save();
+				return $this->refresh();
+			}
 		}
-		return $this->render('event', ['list' => $list]);
+		return $this->render('activity', ['model' => $model]);
 	}
 	
 	public function actionForm(){
@@ -90,9 +100,31 @@ class ActivityController extends Controller{
     }
 	
 	public function actionCalendar(){
-		$list = Activity_bd::find()->orderBy('id_activity')->all();
+		$list = Activity_bd::find()->where(['id_user' => Yii::$app->user->id])->orderBy('id_activity')->all();
 		return $this->render('calendar', ['list' => $list]);
 	}
 	
 	
+	private function getAutoLoad($id){
+		$model = Activity_bd::find()
+        ->where(['id_activity' => $id])
+        ->one();
+		if(is_null($model)){
+			throw new HttpException(404);
+		}
+		return $model;
+	}
+	
+	
+	
+	
+	
+	
+	
 }
+
+
+
+
+
+

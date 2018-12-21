@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?php foreach ($list as $item): ?>
     <div class="calendar_list">
-			<a href="<?= Url::to(['activity/event', 'id' => $item->id_activity]);?>">
+			<a href="<?= Url::to(['activity/view', 'id' => $item->id_activity]);?>">
             <span class="calendar_span">Название события: <?= $item->activity_name ?></span><br>
 		    <span class="calendar_span">Начало: <?= $item->activity_start_timestamp ?></span>
 		    <span class="calendar_span">Конец: <?= $item->activity_end_timestamp ?></span>

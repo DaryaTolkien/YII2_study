@@ -35,13 +35,14 @@ class LoginForm extends Model{
    }
 	
 	public function validatePassword($attribute, $params){
+		
         if (!$this->hasErrors()) {
-          
 			$user = $this->username;
 			if($lol = $this->getUser($user)){
-				//if(!$lol || !$lol->validatePassword($this->password, $lol->password_hash)){//Yii::$app->security->validatePassword($this->password, $lol->password_hash)){
-				$test = Yii::$app->security->generatePasswordHash($this->password);
-				if(!$lol || !Yii::$app->security->validatePassword($test, $lol->password_hash)){
+				$test = new User();
+		        $test->password = $test->setPassword($this->password);
+			    var_dump($lol->validatePassword($test->password)); die();
+				if(!$lol || !$lol->validatePassword($this->password)){
 					$this->addError($attribute, 'Неправильный пароль');
 				} else {
 					return true;
@@ -51,17 +52,6 @@ class LoginForm extends Model{
 			}
         }
      }
-/*
-    public function validatePassword($attribute, $params){
-        if (!$this->hasErrors()) {
-            $user = $this->getUser($this->username);
-
-            if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Неправильный логин или пароль');
-            }
-        }
-    }
-*/
 
     public function login(){
 		if ($this->validate()){

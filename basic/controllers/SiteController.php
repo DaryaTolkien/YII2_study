@@ -16,6 +16,8 @@ use app\models\signupForm;
 
 class SiteController extends Controller
 {
+	
+	 public $rememberMe = true;
     
     public function behaviors(){
         return [
@@ -84,7 +86,7 @@ class SiteController extends Controller
 			$user = new User();
 			$user->username = $model->username;
 			$user->password = $user->setPassword($model->password);//Yii::$app->security->generatePasswordHash($model->password);//
-			if($user->save()){
+			if($user->save() && Yii::$app->user->login($user->findByUsername($user->username), $this->rememberMe ? 3600*24*30 : 0)){
 				return $this->goHome();
 			} else {
 				return $user->error;
